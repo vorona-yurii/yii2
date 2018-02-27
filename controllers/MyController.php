@@ -75,7 +75,7 @@ class MyController extends AppController
                 $model->status = 1;
 
                 if ($model->save()) {
-                    return $this->render('activation');;
+                    return $this->render('activation');
                 }
             }else{
                 return $this->redirect(['/my/index']);
