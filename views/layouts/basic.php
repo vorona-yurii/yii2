@@ -22,10 +22,19 @@ AppAsset::register($this);
     <div class="container">
 
         <nav class="nav">
-            <?= Html::a('Главная', '/web/')?>
-            <?= Html::a('Главная', '/web/')?>
-            <?= Html::a('Главная', '/web/')?>
-            <?= Html::a('Главная', '/web/')?>
+            <?= Html::a('Главная', ['/my/index'])?>
+            <?php
+            if(Yii::$app->user->isGuest){ ?>
+                <?= Html::a('Регистрация', ['/my/signup'])?>
+                <?= Html::a('Войти', ['/my/login'])?>
+            <?php }else{ ?>
+                <?= Html::a('Выйти (' . Yii::$app->user->identity->email . ')', ['/my/logout'])?>
+                <?php if(!Yii::$app->user->identity->status){ ?>
+                    <span style="color: red;">Подтвердите свой емейл</span>
+                <?php }else{?>
+                    <span style="color: green;">Вы подтвердили емейл</span>
+                <?php } ?>
+            <?php } ?>
         </nav>
 
         <?= $content; ?>

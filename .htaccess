@@ -1,0 +1,5 @@
+AddHandler application/x-httpd-php56 .inc .php .php4 .php3 .phtml # phpvs v56
+
+RewriteEngine On
+RewriteCond %{HTTPS} =off 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]

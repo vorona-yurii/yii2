@@ -11,9 +11,9 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class LoginForm extends Model
+class Login extends Model
 {
-    public $username;
+    public $email;
     public $password;
     public $rememberMe = true;
 
@@ -26,11 +26,9 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
+            [['email', 'password'], 'required'],
+            ['email', 'email'],
+            ['password', 'string', 'max' => 10, 'min' => 2],
             ['password', 'validatePassword'],
         ];
     }
@@ -48,7 +46,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Неправильный пароль или емейл.');
             }
         }
     }
@@ -65,15 +63,10 @@ class LoginForm extends Model
         return false;
     }
 
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = UserIdentity::findByUsername($this->username);
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;
