@@ -1,3 +1,6 @@
+<?php
+$this->title = 'Регистрация';
+?>
 <h1>Страница регистрации</h1>
 
 <?php use yii\widgets\ActiveForm;?>
