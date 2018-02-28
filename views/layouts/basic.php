@@ -22,7 +22,7 @@ AppAsset::register($this);
     <div class="container">
 
         <nav class="nav">
-            <?= Html::a('Главная', ['/my/index'])?>
+            <?= Html::a('Главная', ['/my'])?>
             <?php
             if(Yii::$app->user->isGuest){ ?>
                 <?= Html::a('Регистрация', ['/my/signup'])?>

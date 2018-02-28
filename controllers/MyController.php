@@ -32,7 +32,7 @@ class MyController extends AppController
                 $mailSend = new MailKsl();
                 $mailSend->mail_activation($user['email'], $user['key']);
             }
-            return $this->redirect(['/my/index']);
+            return $this->redirect(['/my']);
         }
 
         return $this->render('signup', ['model'=> $model]);
@@ -41,12 +41,12 @@ class MyController extends AppController
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/my/index']);
+            return $this->redirect(['/my']);
         }
 
         $model = new Login();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect(['/my/index']);
+            return $this->redirect(['/my']);
         }
         return $this->render('login', [
             'model' => $model,
@@ -57,7 +57,7 @@ class MyController extends AppController
     {
         Yii::$app->user->logout();
 
-        return $this->redirect(['/my/index']);
+        return $this->redirect(['/my']);
     }
 
     public function actionActivation()
@@ -78,10 +78,10 @@ class MyController extends AppController
                     return $this->render('activation');
                 }
             }else{
-                return $this->redirect(['/my/index']);
+                return $this->redirect(['/my']);
             }
         }else{
-            return $this->redirect(['/my/index']);
+            return $this->redirect(['/my']);
         }
     }
 
